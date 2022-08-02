@@ -1,2 +1,3 @@
 # hexaware_assessment 
-all these soutions are implemente on itelleja idea ide !!
+These Soutions are implemented in Itelleja idea ide and Eclipse as well ;
+
