@@ -1,0 +1,141 @@
+package googleexample;
+
+//import java.beans.Statement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Scanner;
+
+
+public class example {
+
+	public static void main(String[] args) {
+		
+		//menu 
+	
+		Scanner scanner = new Scanner(System.in) ; 
+		
+		int num = 0 ; 
+		
+		do {
+		System.out.println("1. Display the Data from the Table\r\n"
+				+ "					2. Add the Data into the Table\r\n"
+				+ "					3. Update the Data from the Table\r\n"
+				+ "					4. Delete the Data from the Table\r\n"
+				+ "					5. Exit");
+		System.out.println("Enter the value for choice ::");
+		num = scanner.nextInt() ; 
+		
+		if(num == 1) {
+			
+			try { 
+				Class.forName("com.mysql.cj.jdbc.Driver") ;
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tree" , "root"  , "hello") ;
+				java.sql.Statement stmt = con.createStatement() ;
+				System.out.println("Showing record:: ");
+				String sql ="select * from userid" ; 
+				stmt.executeUpdate(sql) ; 
+				con.close() ;
+			}catch (Exception e) {
+				System.out.println(e);
+			} 
+			
+		}
+			
+			else if(num ==2) {
+				
+				try { 
+					Class.forName("com.mysql.cj.jdbc.Driver") ;
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tree" , "root"  , "hello") ;
+					java.sql.Statement stmt = con.createStatement() ;
+					System.out.println("Inserting records::");
+					Boolean choice  ;
+					do {
+						System.out.println("Do you want to insert more rows , true or false ::"); 
+					choice = scanner.nextBoolean() ;
+					if(choice == true) {
+						String str = scanner.nextLine() ;
+						String sql = str ;
+						stmt.executeUpdate(sql) ; 
+					}
+					else {
+						System.out.println("You are done with inserting data!!");
+					}
+						
+					}while(choice == false) ;
+					
+					con.close() ;
+					
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+				
+			}
+			
+			else if(num ==3)
+			{
+				try { 
+					Class.forName("com.mysql.cj.jdbc.Driver") ;
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tree" , "root"  , "hello") ;
+					java.sql.Statement stmt = con.createStatement() ;
+					System.out.println("Updating records\r\n"
+							+ "Enter the emp id :: ");
+					int id = scanner.nextInt() ; 
+
+					String Fname = "first name"  ;
+					String lname = "Last name" ; 
+					int age = 100 ;
+					String sql = "update userid set fname = '" + Fname  + " AND lname = '" + lname  + "' AND age =  '" + age + "' where id is = '" + id + "'" ; 
+					stmt.executeUpdate(sql) ; 
+					con.close() ;
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+				
+				
+			}
+			
+			else {
+				try { 
+					Class.forName("com.mysql.cj.jdbc.Driver") ;
+					Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tree" , "root"  , "hello") ;
+					java.sql.Statement stmt = con.createStatement() ;
+					System.out.println("Deleting record"
+							+ "Enter the id for deletion::");
+					int id = scanner.nextInt() ;
+					
+					String sql = "DELETE from userid WHERE id = '" + id  +  "'";
+					stmt.executeUpdate(sql) ; 
+					con.close() ;
+				}catch (Exception e) {
+					System.out.println(e);
+				}
+				
+				
+				
+			}
+			
+
+		
+		
+		
+		}while(num!=5) ;
+		
+		
+		
+		
+		
+		try { 
+			Class.forName("com.mysql.cj.jdbc.Driver") ;
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/tree" , "root"  , "hello") ;
+			java.sql.Statement stmt = con.createStatement() ;
+			System.out.println("inserting records");
+			String sql ="Insert into userid values()" ; 
+			stmt.executeUpdate(sql) ; 
+			
+		}catch (Exception e) {
+			System.out.println(e);
+		}
+
+	}
+
+}
